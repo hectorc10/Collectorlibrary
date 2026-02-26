@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "createDB": "sequelize-cli db:create",
+    "db:migrate": "sequelize-cli db:migrate",
+    "db:m:undo": "sequelize-cli db:migrate:undo:all",
     "start": "nodemon ./bin/www"
   },
   "dependencies": {
