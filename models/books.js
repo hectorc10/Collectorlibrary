@@ -2,14 +2,14 @@
 const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-  class Book extends Model {
+  class Books extends Model {
     static associate(models) {
-      this.belongsTo(models.Author, { foreignKey: 'authorId' });
+      this.belongsTo(models.Authors, { foreignKey: 'authorId' });
       this.hasOne(models.ReadingStatus, { foreignKey: 'bookId' });
     }
   }
 
-  Book.init({
+  Books.init({
     title: DataTypes.STRING,
     authorId: DataTypes.INTEGER,
     genre: DataTypes.STRING,
@@ -18,8 +18,8 @@ module.exports = (sequelize, DataTypes) => {
     page_count: DataTypes.INTEGER
   }, {
     sequelize,
-    modelName: 'Book',
+    modelName: 'Books',
   });
 
-  return Book;
+  return Books;
 };

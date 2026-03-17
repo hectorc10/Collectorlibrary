@@ -2,9 +2,9 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.bulkInsert("Reading_status", [
+    await queryInterface.bulkInsert("ReadingStatuses", [
       {
-        book_id: 1,
+        bookId: 1,
         status: "Terminado",
         date_started: new Date("2024-01-01"),
         date_finished: new Date("2024-01-10"),
@@ -14,7 +14,7 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        book_id: 2,
+        bookId: 2,
         status: "En proceso",
         date_started: new Date("2024-02-01"),
         date_finished: null,
@@ -23,20 +23,11 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date()
       },
-      {
-        book_id: 3,
-        status: "Terminado",
-        date_started: new Date("2024-03-01"),
-        date_finished: new Date("2024-03-12"),
-        rating: 4,
-        notes: "Buen libro, aunque un poco largo",
-        createdAt: new Date(),
-        updatedAt: new Date()
-      }
+
     ], {});
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete("Reading_status", null, {});
+    await queryInterface.bulkDelete("ReadingStatuses", null, {});
   }
 };
