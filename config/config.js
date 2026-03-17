@@ -1,7 +1,7 @@
-require('dotenv').config();
+const path = require("path");
+require("dotenv").config({ path: path.resolve(__dirname, "../.env") });
 
-
-const {DB_UserName, DB_Password, DB_Name, DB_Host, DB_dialect}=process.env;
+const {DB_UserName, DB_Password, DB_Name, DB_Host, DB_Dialect}=process.env;
 module.exports = {
 
   development: {
@@ -9,7 +9,7 @@ module.exports = {
     password: DB_Password,
     database: DB_Name,
     host: DB_Host,
-    dialect: "postgres"
+    dialect: DB_Dialect
   },
   test: {
     username: "root",
