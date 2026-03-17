@@ -1,15 +1,12 @@
 'use strict';
-/** @type {import('sequelize-cli').Migration} */
+
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Reading_statuses', {
+    await queryInterface.createTable('ReadingStatuses', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
-      },
-      book_id: {
         type: Sequelize.INTEGER
       },
       status: {
@@ -27,6 +24,11 @@ module.exports = {
       notes: {
         type: Sequelize.TEXT
       },
+      bookId: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: { model: 'Books', key: 'id' }
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -37,7 +39,8 @@ module.exports = {
       }
     });
   },
+
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Reading_statuses');
+    await queryInterface.dropTable('ReadingStatuses');
   }
 };

@@ -1,41 +1,25 @@
 'use strict';
+const { Model } = require('sequelize');
 
-module.exports = {
-  async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Reading_status', {
-      id: {
-        type: Sequelize.INTEGER
-      },
-      book_id: {
-        type: Sequelize.INTEGER
-      },
-      status: {
-        type: Sequelize.STRING
-      },
-      date_started: {
-        type: Sequelize.DATE
-      },
-      date_finished: {
-        type: Sequelize.DATE
-      },
-      rating: {
-        type: Sequelize.INTEGER
-      },
-      notes: {
-        type: Sequelize.TEXT
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      }
-    });
-  },
-
-  async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Reading_status');
+module.exports = (sequelize, DataTypes) => {
+  class ReadingStatus extends Model {
+    static associate(models) {
+      this.belongsTo(models.Books, { foreignKey: 'bookId' });
+    }
   }
+
+  ReadingStatus.init({
+    status: DataTypes.STRING,
+    date_started: DataTypes.DATE,
+    date_finished: DataTypes.DATE,
+    rating: DataTypes.INTEGER,
+    notes: DataTypes.TEXT,
+    bookId: DataTypes.INTEGER
+  }, {
+    sequelize,
+    modelName: 'ReadingStatus',
+    
+  });
+
+  return ReadingStatus;
 };
