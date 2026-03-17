@@ -29,8 +29,6 @@ let getBooks = async (request, response) => {
 
     }
 }
-const { Books } = require("../../models");
-
 let getBookByISBN = async (req, res) => {
   try {
     const { isbn } = req.params;
@@ -58,7 +56,37 @@ let getBookByISBN = async (req, res) => {
     });
   }
 };
+
+let createBook = async (req, res) => {
+  try {
+    const { title, isbn, authorId } = req.body;
+
+    if (!title || !isbn || !authorId) {
+      return res.status(400).json({
+        status: 400,
+        message: "Faltan datos requeridos: title, isbn, authorId"
+      });
+    }
+
+    const newBook = await Books.create(req.body);
+
+    return res.status(201).json({
+      status: 201,
+      data: newBook
+    });
+
+  } catch (error) {
+    return res.status(500).json({
+      status: 500,
+      message: error.message
+    });
+  }
+};
+
+
 module.exports = {
     getBooks,
+    getBookByISBN,
+    createBook
   
 };
