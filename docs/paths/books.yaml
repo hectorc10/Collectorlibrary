@@ -1,0 +1,92 @@
+books:
+  post:
+    summary: Create a new book
+    tags: [Books]
+
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+                example: "Cien años de soledad"
+              isbn:
+                type: string
+                example: "123456789"
+              authorId:
+                type: integer
+                example: 1
+
+    responses:
+      "201":
+        description: Libro creado con éxito
+        content:
+          application/json:
+            example:
+              status: 201
+              data:
+                id: 1
+                title: "Cien años de soledad"
+                isbn: "123456789"
+                authorId: 1
+
+      "400":
+        description: Faltan datos obligatorios
+        content:
+          application/json:
+            example:
+              status: 400
+              message: "Faltan datos obligatorios"
+
+      "500":
+        description: Error del servidor
+        content:
+          application/json:
+            example:
+              status: 500
+              message: "Error del servidor"
+
+/api/books/{isbn}:
+  get:
+    summary: Get book by ISBN
+    tags: [Books]
+
+    parameters:
+      - in: path
+        name: isbn
+        required: true
+        schema:
+          type: string
+        example: "123456789"
+
+    responses:
+      "200":
+        description: Libro encontrado
+        content:
+          application/json:
+            example:
+              status: 200
+              data:
+                id: 1
+                title: "Cien años de soledad"
+                isbn: "123456789"
+                authorId: 1
+
+      "404":
+        description: Libro no encontrado
+        content:
+          application/json:
+            example:
+              status: 404
+              message: "Libro no encontrado"
+
+      "500":
+        description: Error del servidor
+        content:
+          application/json:
+            example:
+              status: 500
+              message: "Error del servidor"

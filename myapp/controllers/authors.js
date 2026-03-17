@@ -1,18 +1,18 @@
 const { Authors } = require("../../models");
-let getAuthors = async (request, response) => {
+let getAuthors = async (req, res) => {
     try {
 
         let authors = await Authors.findAll();
 
         if (authors.length <=0) {
 
-            response.status(204).json({
+            Response.status(204).json({
                 status: 204,
                 message: "No se encontraron autores"
             })
 
         } else {
-            response.status(200).json({
+            Response.status(200).json({
                 status: 200,
                 data: authors
             });
@@ -21,7 +21,7 @@ let getAuthors = async (request, response) => {
 
     } catch (error) {
 
-        response.status(500).json({
+        Response.status(500).json({
             status: 500,
             message: error.message
         });
